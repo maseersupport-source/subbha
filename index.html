@@ -3424,8 +3424,195 @@
 }
 </style>
 
+<style id="subbha-intro-loader-style">
+  body.subbha-intro-active{overflow:hidden}
+  .subbha-intro{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:grid;
+    place-items:center;
+    min-height:100dvh;
+    padding:28px;
+    overflow:hidden;
+    color:#fff8ea;
+    background:
+      radial-gradient(circle at 50% 38%,rgba(224,189,121,.18),transparent 19rem),
+      radial-gradient(circle at 14% 12%,rgba(185,130,43,.13),transparent 22rem),
+      linear-gradient(145deg,#160d08 0%,#2b1b13 48%,#422615 100%);
+    opacity:1;
+    visibility:visible;
+    transition:opacity .65s ease,visibility .65s ease;
+    isolation:isolate;
+  }
+  .subbha-intro:before,
+  .subbha-intro:after{
+    content:"";
+    position:absolute;
+    border:1px solid rgba(224,189,121,.11);
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .subbha-intro:before{width:min(72vw,720px);aspect-ratio:1;animation:subbhaIntroHalo 5s ease-in-out infinite}
+  .subbha-intro:after{width:min(52vw,520px);aspect-ratio:1;opacity:.58;animation:subbhaIntroHalo 5s 1s ease-in-out infinite reverse}
+  .subbha-intro.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+  .subbha-intro__content{
+    position:relative;
+    z-index:1;
+    width:min(440px,88vw);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .subbha-intro__emblem{
+    position:relative;
+    width:min(330px,76vw);
+    min-height:156px;
+    display:grid;
+    place-items:center;
+    padding:30px 28px;
+    border:1px solid rgba(224,189,121,.2);
+    border-radius:42px;
+    background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.018));
+    box-shadow:0 30px 80px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+  }
+  .subbha-intro__emblem:before{
+    content:"";
+    position:absolute;
+    inset:-1px;
+    border-radius:inherit;
+    padding:1px;
+    background:linear-gradient(120deg,transparent 18%,rgba(224,189,121,.72),transparent 58%);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    animation:subbhaIntroShine 2.8s ease-in-out infinite;
+    pointer-events:none;
+  }
+  .subbha-intro__logo{
+    display:none;
+    width:min(270px,65vw);
+    height:auto;
+    max-height:108px;
+    object-fit:contain;
+    filter:brightness(0) invert(1) sepia(.14) saturate(.8);
+    animation:subbhaIntroLogo 2.4s ease-in-out infinite;
+  }
+  .subbha-intro__logo.is-ready{display:block}
+  .subbha-intro__logo.is-ready + .subbha-intro__fallback{display:none}
+  .subbha-intro__fallback{
+    font-family:"Noto Naskh Arabic",serif;
+    font-size:3.45rem;
+    line-height:.9;
+    font-weight:800;
+    color:#fff8ea;
+  }
+  .subbha-intro__fallback small{
+    display:block;
+    margin-top:17px;
+    padding-right:.38em;
+    font-family:"Noto Kufi Arabic",system-ui,sans-serif;
+    font-size:.68rem;
+    letter-spacing:.38em;
+    color:var(--gold-2,#e0bd79);
+  }
+  .subbha-intro__caption{margin:25px 0 0;font-size:.9rem;font-weight:600;letter-spacing:.01em;color:rgba(255,248,234,.82)}
+  .subbha-intro__progress{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px}
+  .subbha-intro__progress span{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--gold-2,#e0bd79);
+    box-shadow:0 0 16px rgba(224,189,121,.34);
+    animation:subbhaIntroBead 1s ease-in-out infinite;
+  }
+  .subbha-intro__progress span:nth-child(2){animation-delay:.12s}
+  .subbha-intro__progress span:nth-child(3){animation-delay:.24s}
+  .subbha-intro__progress span:nth-child(4){animation-delay:.36s}
+  .subbha-intro__progress span:nth-child(5){animation-delay:.48s}
+  .subbha-intro__sr-only{
+    position:absolute!important;
+    width:1px!important;
+    height:1px!important;
+    padding:0!important;
+    margin:-1px!important;
+    overflow:hidden!important;
+    clip:rect(0,0,0,0)!important;
+    white-space:nowrap!important;
+    border:0!important;
+  }
+  @keyframes subbhaIntroBead{0%,100%{transform:translateY(0);opacity:.42}50%{transform:translateY(-7px);opacity:1}}
+  @keyframes subbhaIntroLogo{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.025);opacity:1}}
+  @keyframes subbhaIntroHalo{0%,100%{transform:scale(.96);opacity:.35}50%{transform:scale(1.04);opacity:.8}}
+  @keyframes subbhaIntroShine{0%,100%{opacity:.25}50%{opacity:1}}
+  @media(max-width:560px){
+    .subbha-intro__emblem{min-height:136px;border-radius:32px;padding:24px 22px}
+    .subbha-intro__fallback{font-size:3rem}
+    .subbha-intro__caption{font-size:.82rem}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .subbha-intro,
+    .subbha-intro:before,
+    .subbha-intro:after,
+    .subbha-intro__emblem:before,
+    .subbha-intro__logo,
+    .subbha-intro__progress span{animation:none!important;transition-duration:.01ms!important}
+  }
+</style>
+
 </head>
-<body>
+<body class="subbha-intro-active" aria-busy="true">
+  <div class="subbha-intro" id="subbhaIntro" role="status" aria-live="polite" aria-atomic="true" aria-label="جاري تحميل متجر سبحة">
+    <div class="subbha-intro__content">
+      <div class="subbha-intro__emblem">
+        <img class="subbha-intro__logo" id="subbhaIntroLogo" alt="شعار سبحة" width="270" height="106" decoding="sync">
+        <div class="subbha-intro__fallback" aria-hidden="true">سبحة<small>SUBBHA</small></div>
+      </div>
+      <p class="subbha-intro__caption">نُهيّئ لك تجربة سبحة مميزة</p>
+      <div class="subbha-intro__progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      <span class="subbha-intro__sr-only">جاري تحميل المتجر</span>
+    </div>
+  </div>
+  <noscript><style>#subbhaIntro{display:none!important}body.subbha-intro-active{overflow:auto!important}</style></noscript>
+  <script id="subbha-intro-loader-script">
+    (() => {
+      const intro = document.getElementById("subbhaIntro");
+      const logo = document.getElementById("subbhaIntroLogo");
+      const favicon = document.querySelector('link[rel="icon"][href]');
+      const startedAt = performance.now();
+      const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      let dismissed = false;
+
+      const revealLogo = () => logo?.classList.add("is-ready");
+      if (logo && favicon?.href) {
+        logo.addEventListener("load", revealLogo, {once:true});
+        logo.src = favicon.href;
+        if (logo.complete && logo.naturalWidth) revealLogo();
+      }
+
+      const dismiss = () => {
+        if (dismissed || !intro) return;
+        dismissed = true;
+        intro.classList.add("is-leaving");
+        intro.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("subbha-intro-active");
+        document.body.removeAttribute("aria-busy");
+        window.setTimeout(() => intro.remove(), reducedMotion ? 40 : 720);
+      };
+
+      const finishLoading = () => {
+        const minimumVisibleTime = reducedMotion ? 180 : 1050;
+        const remaining = Math.max(0,minimumVisibleTime - (performance.now() - startedAt));
+        window.setTimeout(dismiss,remaining);
+      };
+
+      window.addEventListener("load",finishLoading,{once:true});
+      window.setTimeout(dismiss,4200);
+    })();
+  </script>
   <div class="topbar">
     <div class="container">
       <span><i data-lucide="lock-keyhole"></i> دفع آمن وموثوق</span>
